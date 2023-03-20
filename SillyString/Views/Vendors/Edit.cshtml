@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout-Admin";
+}
+@model ElectronicsVendor.Models.Vendor
+
+<h2>Editing vendor <span class="highlighted">@Html.DisplayFor(model => model.Name)</span></h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.VendorId)
+  <div class="form-row">
+    @Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)
+    <button class="green" type="submit">Save</button>
+  </div>
+}
+
+<div class="button-area">
+  <a href='@Url.Action("Details", "Vendors", new { id = Model.VendorId })'>
+    <button>Cancel</button>
+  </a>
+</div>

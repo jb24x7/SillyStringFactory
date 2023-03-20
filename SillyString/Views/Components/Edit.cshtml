@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout-Admin";
+}
+@model ElectronicsVendor.Models.Component
+
+<h2>Editing <span class="highlighted">@Html.DisplayFor(model => model.Type) @Html.DisplayFor(model => model.Manufacturer) @Html.DisplayFor(model => model.Name)</span></h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ComponentId)
+  <div class="form-row">
+    @Html.LabelFor(model => model.Manufacturer)
+    @Html.EditorFor(model => model.Manufacturer)
+  </div>
+  <div class="form-row">
+    @Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)
+  </div>
+  <div class="form-row">
+    @Html.LabelFor(model => model.Type)
+    @Html.EditorFor(model => model.Type)
+  </div>
+}
+<button class="green" type="submit">Save</button>
+
+<div class="button-area">
+  <a href='@Url.Action("Details", "Components", new { id = Model.ComponentId })'>
+    <button>Cancel</button>
+  </a>
+</div>

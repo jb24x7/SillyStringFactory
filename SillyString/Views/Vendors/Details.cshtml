@@ -1,0 +1,54 @@
+@{
+  Layout = "_Layout";
+}
+
+@using ElectronicsVendor.Models
+@model ElectronicsVendor.Models.Vendor
+
+<h2>Vendor Details for @Html.DisplayFor(model => model.Name)</h2>
+
+@if (@Model.JoinEntities.Count == 0)
+{
+  <p>There are no components sold by this vendor.</p>
+}
+else
+{
+  <h4>Components sold by this vendor:</h4>
+  <ul class="component-list narrow">
+  @foreach (ComponentVendor join in Model.JoinEntities)
+    {
+      <li>
+      <a href='@Url.Action("Details", "Components", new { id = join.Component.ComponentId })'>
+        <div>@join.Component.Manufacturer @join.Component.Name </div>
+        <div>@join.Component.Type</div>
+      </a>
+      @using (Html.BeginForm("DeleteJoin", "Vendors"))
+      {
+        @Html.Hidden("joinId", @join.ComponentVendorId)
+        <button class="red" type="submit">Delete</button>
+      }
+    </li> 
+    }
+  </ul>
+}
+<a href='@Url.Action("AddComponent", new { id = Model.VendorId })'>
+  <button class="green">Add a Component</button>
+</a>
+
+<div class="button-area">
+  <a href='@Url.Action("Index")'>
+    <button>Back to List</button>
+  </a>
+  <a href='@Url.Action("Edit", new { id = Model.VendorId })'>
+    <button class="yellow">Edit Vendor</button>
+  </a>
+
+  <a href='@Url.Action("Delete", new { id = Model.VendorId })'>
+    <button class="red">Delete Vendor</button>
+  </a>
+</div>
+
+@* <p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Add a Component", "AddComponent", new { id = Model.VendorId })</p>
+<p>@Html.ActionLink("Edit Vendor", "Edit", new { id = Model.VendorId })</p>
+<p>@Html.ActionLink("Delete Vendor", "Delete", new { id = Model.VendorId })</p> *@

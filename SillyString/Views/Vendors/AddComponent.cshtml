@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout-Admin";
+}
+@model ElectronicsVendor.Models.Vendor
+
+<h2>Add a component to vendor <span class="highlighted">@Html.DisplayFor(model => model.Name)</span></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.VendorId)
+    <div class="form-row">
+      @Html.Label("Select component")
+      @Html.DropDownList("ComponentId", "Select One")
+      <button class="green" type="submit">Save</button>
+    </div>
+}
+
+<div class="button-area">
+  <a href='@Url.Action("Index")'>
+    <button>Cancel</button>
+  </a>
+</div>
