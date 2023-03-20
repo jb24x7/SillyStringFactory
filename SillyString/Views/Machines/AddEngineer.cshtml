@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout-Admin";
+}
+@model SillyString.Models.Machine
+
+<h2>Add a egineer to machine <span class="highlighted">@Html.DisplayFor(model => model.Name)</span></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.MachineId)
+    <div class="form-row">
+      @Html.Label("Select egineer")
+      @Html.DropDownList("EgineerId", "Select One")
+      <button class="green" type="submit">Save</button>
+    </div>
+}
+
+<div class="button-area">
+  <a href='@Url.Action("Index")'>
+    <button>Cancel</button>
+  </a>
+</div>

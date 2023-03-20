@@ -1,13 +1,13 @@
 @{
   Layout = "_Layout-Admin";
 }
-@model ElectronicsVendor.Models.Vendor
+@model SillyString.Models.Machine
 
-<h2>Editing vendor <span class="highlighted">@Html.DisplayFor(model => model.Name)</span></h2>
+<h2>Editing machine <span class="highlighted">@Html.DisplayFor(model => model.Name)</span></h2>
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.VendorId)
+  @Html.HiddenFor(model => model.MachineId)
   <div class="form-row">
     @Html.LabelFor(model => model.Name)
     @Html.EditorFor(model => model.Name)
@@ -16,7 +16,7 @@
 }
 
 <div class="button-area">
-  <a href='@Url.Action("Details", "Vendors", new { id = Model.VendorId })'>
+  <a href='@Url.Action("Details", "Machines", new { id = Model.MachineId })'>
     <button>Cancel</button>
   </a>
 </div>

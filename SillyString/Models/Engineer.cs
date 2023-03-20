@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System;
 
-namespace ElectronicsVendor.Models
+namespace SillyString.Models
 {
-  public class Component
+  public class Egineer
   {
-    public int ComponentId { get; set; }
+    public int EgineerId { get; set; }
     public string Name { get; set; }
     public string Type { get; set; }
     public string Manufacturer { get; set; }
     public int Price { get; set; }
-    public List<ComponentVendor> JoinEntities { get; }
+    public List<EgineerMachine> JoinEntities { get; }
   }
 }

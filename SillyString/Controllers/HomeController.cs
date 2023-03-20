@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ElectronicsVendor.Controllers
+namespace SillyString.Controllers
 {
   public class HomeController : Controller
   {

@@ -1,33 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
-using ElectronicsVendor.Models;
+using SillyString.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace ElectronicsVendor.Controllers
+namespace SillyString.Controllers
 {
-  public class VendorsController : Controller
+  public class MachinesController : Controller
   {
-    private readonly ElectronicsVendorContext _db;
+    private readonly SillyStringContext _db;
 
-    public VendorsController(ElectronicsVendorContext db)
+    public MachinesController(SillyStringContext db)
     {
       _db = db;
     }
 
     public ActionResult Index()
     {
-      return View(_db.Vendors.ToList());
+      return View(_db.Machines.ToList());
     }
 
     public ActionResult Details(int id)
     {
-      Vendor thisVendor = _db.Vendors
-          .Include(vendor => vendor.JoinEntities)
-          .ThenInclude(join => join.Component)
-          .FirstOrDefault(vendor => vendor.VendorId == id);
-      return View(thisVendor);
+      Machine thisMachine = _db.Machines
+          .Include(machine => machine.JoinEntities)
+          .ThenInclude(join => join.Egineer)
+          .FirstOrDefault(machine => machine.MachineId == id);
+      return View(thisMachine);
     }
 
     public ActionResult Create()
@@ -36,60 +36,60 @@ namespace ElectronicsVendor.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Vendor vendor)
+    public ActionResult Create(Machine machine)
     {
-      _db.Vendors.Add(vendor);
+      _db.Machines.Add(machine);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddComponent(int id)
+    public ActionResult AddEgineer(int id)
     {
-      Vendor thisVendor = _db.Vendors.FirstOrDefault(vendors => vendors.VendorId == id);
-      ViewBag.ComponentId = new SelectList(_db.Components, "ComponentId", "Name", "Name");
-      return View(thisVendor);
+      Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+      ViewBag.EgineerId = new SelectList(_db.Egineers, "EgineerId", "Name", "Name");
+      return View(thisMachine);
     }
 // ------------------------------------------------------------------
 
     [HttpPost]
-    public ActionResult AddComponent(Vendor vendor, int componentId)
+    public ActionResult AddEgineer(Machine machine, int egineerId)
     {
 #nullable enable
-      ComponentVendor? joinEntity = _db.ComponentVendors.FirstOrDefault(join => (join.ComponentId == componentId && join.VendorId == vendor.VendorId));
+      EgineerMachine? joinEntity = _db.EgineerMachines.FirstOrDefault(join => (join.EgineerId == egineerId && join.MachineId == machine.MachineId));
       #nullable disable
-      if (joinEntity == null && componentId != 0)
+      if (joinEntity == null && egineerId != 0)
       {
-        _db.ComponentVendors.Add(new ComponentVendor() { ComponentId = componentId, VendorId = vendor.VendorId });
+        _db.EgineerMachines.Add(new EgineerMachine() { EgineerId = egineerId, MachineId = machine.MachineId });
         _db.SaveChanges();
       }
-      return RedirectToAction("Details", new { id = vendor.VendorId });
+      return RedirectToAction("Details", new { id = machine.MachineId });
     }
 
     public ActionResult Edit(int id)
     {
-      Vendor thisVendor = _db.Vendors.FirstOrDefault(vendors => vendors.VendorId == id);
-      return View(thisVendor);
+      Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+      return View(thisMachine);
     }
 
     [HttpPost]
-    public ActionResult Edit(Vendor vendor)
+    public ActionResult Edit(Machine machine)
     {
-      _db.Vendors.Update(vendor);
+      _db.Machines.Update(machine);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
         public ActionResult Delete(int id)
     {
-      Vendor thisVendor = _db.Vendors.FirstOrDefault(vendors => vendors.VendorId == id);
-      return View(thisVendor);
+      Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+      return View(thisMachine);
     }
 
         [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Vendor thisVendor = _db.Vendors.FirstOrDefault(vendors => vendors.VendorId == id);
-      _db.Vendors.Remove(thisVendor);
+      Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+      _db.Machines.Remove(thisMachine);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -97,8 +97,8 @@ namespace ElectronicsVendor.Controllers
         [HttpPost]
     public ActionResult DeleteJoin(int joinId)
     {
-      ComponentVendor joinEntry = _db.ComponentVendors.FirstOrDefault(entry => entry.ComponentVendorId == joinId);
-      _db.ComponentVendors.Remove(joinEntry);
+      EgineerMachine joinEntry = _db.EgineerMachines.FirstOrDefault(entry => entry.EgineerMachineId == joinId);
+      _db.EgineerMachines.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

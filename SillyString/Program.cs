@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ElectronicsVendor.Models;
+using SillyString.Models;
 
-namespace ElectronicsVendor
+namespace SillyString
 {
   class Program
   {
@@ -14,7 +14,7 @@ namespace ElectronicsVendor
 
       builder.Services.AddControllersWithViews();
 
-      builder.Services.AddDbContext<ElectronicsVendorContext>(
+      builder.Services.AddDbContext<SillyStringContext>(
                         dbContextOptions => dbContextOptions
                           .UseMySql(
                             builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]

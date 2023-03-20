@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout-Admin";
+}
+
+@model SillyString.Models.Machine
+
+<h2>Are you sure you want to delete machine <span class="highlighted"> @Html.DisplayFor(model => model.Name)</span>?</h2>
+
+@using (Html.BeginForm())
+{
+  <div class="form-row">
+    <button class="red" type="submit">Delete</button>
+  </div>
+}
+
+<div class="button-area">
+  <a href='@Url.Action("Details", "Machines", new { id = Model.MachineId })'>
+    <button>Cancel</button>
+  </a>
+</div>
