@@ -2,7 +2,7 @@
   Layout = "_Layout-Admin";
 }
 
-@model SillyString.Models.Egineer
+@model SillyString.Models.Engineer
 
 <h2>Are you sure you want to delete egineer type <span class="highlighted">@Html.DisplayFor(model => model.Type)</span>?</h2>
 
@@ -14,7 +14,7 @@
 }
 
 <div class="button-area">
-  <a href='@Url.Action("Details", new { id = Model.EgineerId })'>
+  <a href='@Url.Action("Details", new { id = Model.EngineerId })'>
     <button>Cancel</button>
   </a>
 </div>

@@ -13,26 +13,26 @@
 }
 else
 {
-  <h4>Egineers that can repair by this machine:</h4>
+  <h4>Engineers that can repair by this machine:</h4>
   <ul class="egineer-list narrow">
-  @foreach (EgineerMachine join in Model.JoinEntities)
+  @foreach (EngineerMachine join in Model.JoinEntities)
     {
       <li>
-      <a href='@Url.Action("Details", "Egineers", new { id = join.Egineer.EgineerId })'>
-        <div>@join.Egineer.Manufacturer @join.Egineer.Name </div>
-        <div>@join.Egineer.Type</div>
+      <a href='@Url.Action("Details", "Engineers", new { id = join.Engineer.EngineerId })'>
+        <div>@join.Engineer.Manufacturer @join.Engineer.Name </div>
+        <div>@join.Engineer.Type</div>
       </a>
       @using (Html.BeginForm("DeleteJoin", "Machines"))
       {
-        @Html.Hidden("joinId", @join.EgineerMachineId)
+        @Html.Hidden("joinId", @join.EngineerMachineId)
         <button class="red" type="submit">Delete</button>
       }
     </li> 
     }
   </ul>
 }
-<a href='@Url.Action("AddEgineer", new { id = Model.MachineId })'>
-  <button class="green">Add a Egineer</button>
+<a href='@Url.Action("AddEngineer", new { id = Model.MachineId })'>
+  <button class="green">Add a Engineer</button>
 </a>
 
 <div class="button-area">

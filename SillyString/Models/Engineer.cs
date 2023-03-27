@@ -3,13 +3,13 @@ using System;
 
 namespace SillyString.Models
 {
-  public class Egineer
+  public class Engineer
   {
-    public int EgineerId { get; set; }
+    public int EngineerId { get; set; }
     public string Name { get; set; }
     public string Type { get; set; }
     public string Manufacturer { get; set; }
     public int Price { get; set; }
-    public List<EgineerMachine> JoinEntities { get; }
+    public List<EngineerMachine> JoinEntities { get; }
   }
 }

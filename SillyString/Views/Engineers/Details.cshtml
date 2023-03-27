@@ -3,7 +3,7 @@
 }
 
 @using SillyString.Models
-@model SillyString.Models.Egineer
+@model SillyString.Models.Engineer
 
 <h2>Details for @Html.DisplayFor(model => model.Type) <span class="highlighted">@Html.DisplayFor(model => model.Manufacturer) @Html.DisplayFor(model => model.Name)<span></h2>
 
@@ -20,19 +20,19 @@ else
 {
   <h4>Machines with this egineer:</h4>
   <ul class="machine-list">
-  @foreach (EgineerMachine join in Model.JoinEntities)
+  @foreach (EngineerMachine join in Model.JoinEntities)
     {
       <li>@join.Machine.Name
-        @using (Html.BeginForm("DeleteJoin", "Egineers"))
+        @using (Html.BeginForm("DeleteJoin", "Engineers"))
         {
-          @Html.Hidden("joinId", @join.EgineerMachineId)
+          @Html.Hidden("joinId", @join.EngineerMachineId)
           <button class="red" type="submit">Delete</button>
         }
       </li>
     }
   </ul>
 }
-<a href='@Url.Action("AddMachine", new { id = Model.EgineerId })'>
+<a href='@Url.Action("AddMachine", new { id = Model.EngineerId })'>
   <button class="green">Add a Machine</button>
 </a>
 </div>
@@ -41,11 +41,11 @@ else
   <a href='@Url.Action("Index")'>
     <button>Back to List</button>
   </a>
-  <a href='@Url.Action("Edit", new { id = Model.EgineerId })'>
-    <button class="yellow">Edit Egineer</button>
+  <a href='@Url.Action("Edit", new { id = Model.EngineerId })'>
+    <button class="yellow">Edit Engineer</button>
   </a>
 
-  <a href='@Url.Action("Delete", new { id = Model.EgineerId })'>
-    <button class="red">Delete Egineer</button>
+  <a href='@Url.Action("Delete", new { id = Model.EngineerId })'>
+    <button class="red">Delete Engineer</button>
   </a>
 </div>

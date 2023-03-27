@@ -1,11 +1,11 @@
 namespace SillyString.Models
 {
-public class EgineerMachine
+public class EngineerMachine
   {
-    public int EgineerMachineId { get; set; }
-    public int EgineerId { get; set; }
+    public int EngineerMachineId { get; set; }
+    public int EngineerId { get; set; }
     public int MachineId { get; set; }
-    public Egineer Egineer { get; set; }
+    public Engineer Engineer { get; set; }
     public Machine Machine { get; set; }
   }
 }

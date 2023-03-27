@@ -25,7 +25,7 @@ namespace SillyString.Controllers
     {
       Machine thisMachine = _db.Machines
           .Include(machine => machine.JoinEntities)
-          .ThenInclude(join => join.Egineer)
+          .ThenInclude(join => join.Engineer)
           .FirstOrDefault(machine => machine.MachineId == id);
       return View(thisMachine);
     }
@@ -43,23 +43,23 @@ namespace SillyString.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddEgineer(int id)
+    public ActionResult AddEngineer(int id)
     {
       Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
-      ViewBag.EgineerId = new SelectList(_db.Egineers, "EgineerId", "Name", "Name");
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name", "Name");
       return View(thisMachine);
     }
 // ------------------------------------------------------------------
 
     [HttpPost]
-    public ActionResult AddEgineer(Machine machine, int egineerId)
+    public ActionResult AddEngineer(Machine machine, int egineerId)
     {
 #nullable enable
-      EgineerMachine? joinEntity = _db.EgineerMachines.FirstOrDefault(join => (join.EgineerId == egineerId && join.MachineId == machine.MachineId));
+      EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.EngineerId == egineerId && join.MachineId == machine.MachineId));
       #nullable disable
       if (joinEntity == null && egineerId != 0)
       {
-        _db.EgineerMachines.Add(new EgineerMachine() { EgineerId = egineerId, MachineId = machine.MachineId });
+        _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = egineerId, MachineId = machine.MachineId });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = machine.MachineId });
@@ -97,8 +97,8 @@ namespace SillyString.Controllers
         [HttpPost]
     public ActionResult DeleteJoin(int joinId)
     {
-      EgineerMachine joinEntry = _db.EgineerMachines.FirstOrDefault(entry => entry.EgineerMachineId == joinId);
-      _db.EgineerMachines.Remove(joinEntry);
+      EngineerMachine joinEntry = _db.EngineerMachines.FirstOrDefault(entry => entry.EngineerMachineId == joinId);
+      _db.EngineerMachines.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

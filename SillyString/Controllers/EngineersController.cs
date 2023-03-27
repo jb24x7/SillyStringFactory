@@ -7,19 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SillyString.Controllers
 {
-  public class EgineersController : Controller
+  public class EngineersController : Controller
   {
 
     private readonly SillyStringContext _db;
-    public EgineersController(SillyStringContext db)
+    public EngineersController(SillyStringContext db)
     {
       _db = db;
     }
 
     public ActionResult Index()
     {
-      List<Egineer> model = _db.Egineers.ToList(); 
-        model = _db.Egineers.ToList();
+      List<Engineer> model = _db.Engineers.ToList(); 
+        model = _db.Engineers.ToList();
       return View(model);
     }
 
@@ -31,7 +31,7 @@ namespace SillyString.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Egineer egineer)
+    public ActionResult Create(Engineer egineer)
     {
       if (!ModelState.IsValid)
       {
@@ -40,7 +40,7 @@ namespace SillyString.Controllers
       }
       else
       {
-        _db.Egineers.Add(egineer);
+        _db.Engineers.Add(egineer);
         _db.SaveChanges();
         return RedirectToAction("Index");
       }
@@ -48,71 +48,71 @@ namespace SillyString.Controllers
 
     public ActionResult Details(int id)
     {
-      Egineer thisEgineer = _db.Egineers
+      Engineer thisEngineer = _db.Engineers
           .Include(egineer => egineer.JoinEntities)
           .ThenInclude(join => join.Machine)
-          .FirstOrDefault(egineer => egineer.EgineerId == id);
-      return View(thisEgineer);
+          .FirstOrDefault(egineer => egineer.EngineerId == id);
+      return View(thisEngineer);
     }
 
     public ActionResult Edit(int id)
     {
-      Egineer thisEgineer = _db.Egineers
+      Engineer thisEngineer = _db.Engineers
             .Include(egineer => egineer.JoinEntities)
             .ThenInclude(join => join.Machine)
-            .FirstOrDefault(egineer => egineer.EgineerId == id);
-      return View(thisEgineer);
+            .FirstOrDefault(egineer => egineer.EngineerId == id);
+      return View(thisEngineer);
     }
 
     [HttpPost]
-    public ActionResult Edit(Egineer egineer)
+    public ActionResult Edit(Engineer egineer)
     {
-      _db.Egineers.Update(egineer);
+      _db.Engineers.Update(egineer);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Delete(int id)
     {
-      Egineer thisEgineer = _db.Egineers.FirstOrDefault(egineer => egineer.EgineerId == id);
-      return View(thisEgineer);
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(egineer => egineer.EngineerId == id);
+      return View(thisEngineer);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Egineer thisEgineer = _db.Egineers.FirstOrDefault(egineer => egineer.EgineerId == id);
-      _db.Egineers.Remove(thisEgineer);
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(egineer => egineer.EngineerId == id);
+      _db.Engineers.Remove(thisEngineer);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult AddMachine(int id)
     {
-      Egineer thisEgineer = _db.Egineers.FirstOrDefault(egineer => egineer.EgineerId == id);
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(egineer => egineer.EngineerId == id);
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name");
-      return View(thisEgineer);
+      return View(thisEngineer);
     }
 
     [HttpPost]
-    public ActionResult AddMachine(Egineer egineer, int machineId)
+    public ActionResult AddMachine(Engineer egineer, int machineId)
     {
 #nullable enable
-      EgineerMachine? joinEntity = _db.EgineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EgineerId == egineer.EgineerId));
+      EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == egineer.EngineerId));
 #nullable disable
       if (joinEntity == null && machineId != 0)
       {
-        _db.EgineerMachines.Add(new EgineerMachine() { MachineId = machineId, EgineerId = egineer.EgineerId });
+        _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = egineer.EngineerId });
         _db.SaveChanges();
       }
-      return RedirectToAction("Details", new { id = egineer.EgineerId });
+      return RedirectToAction("Details", new { id = egineer.EngineerId });
     }
 
     [HttpPost]
     public ActionResult DeleteJoin(int joinId)
     {
-      EgineerMachine joinEntry = _db.EgineerMachines.FirstOrDefault(entry => entry.EgineerMachineId == joinId);
-      _db.EgineerMachines.Remove(joinEntry);
+      EngineerMachine joinEntry = _db.EngineerMachines.FirstOrDefault(entry => entry.EngineerMachineId == joinId);
+      _db.EngineerMachines.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

@@ -7,6 +7,6 @@ namespace SillyString.Models
   {
     public int MachineId { get; set; }
     public string Name { get; set; }
-    public List<EgineerMachine> JoinEntities { get; }
+    public List<EngineerMachine> JoinEntities { get; }
   }
 }
