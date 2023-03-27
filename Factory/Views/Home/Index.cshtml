@@ -8,32 +8,7 @@
 
 
 <div class="button-area">
-  <ul class="machine-list">
-  @foreach (Machine machine in Model.JoinEntities)
-    {
-      <li>@machine.Name
-        @using (Html.BeginForm("DeleteJoin", "Engineers"))
-        {
-          @Html.Hidden("joinId", @machine.MachineId)
-          <button class="red" type="submit">Delete</button>
-        }
-      </li>
-    }
-  </ul>
-   <ul class="egineer-list narrow">
-  @foreach (Engineer engineer in Model.JoinEntities)
-    {
-      <li>
-      <a href='@Url.Action("Details", "Engineers", new { id = engineer.EngineerId })'>
-      </a>
-      @using (Html.BeginForm("DeleteJoin", "Machines"))
-      {
-        @Html.Hidden("joinId", @engineer.EngineerId)
-        <button class="red" type="submit">Delete</button>
-      }
-    </li> 
-    }
-  </ul>
+
     <a href='@Url.Action("Index", "Engineers")'>
     <button>See all engineers</button>
   </a>

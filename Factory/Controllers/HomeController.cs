@@ -18,14 +18,6 @@ namespace SillyString.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
-      ViewBag.Engineers = _db.Engineers
-                      .Include(book => book.JoinEntities)
-                      .ThenInclude(join => join.Engineer)
-                      .ToList();
-      ViewBag.Machines = _db.Machines
-                      .Include(author => author.JoinEntities)
-                      .ThenInclude(join => join.Machine)
-                      .ToList();
       return View();
     }    
   }
