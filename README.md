@@ -1,4 +1,4 @@
-# Dr. Sillystringz's Factory
+# Silly String Factory
 
 #### By James Provance
 
