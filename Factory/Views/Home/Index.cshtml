@@ -3,31 +3,32 @@
 }
 @using SillyString.Models
 
+
 <h1>Welcome to Silly String factory!</h1>
 
 
 <div class="button-area">
   <ul class="machine-list">
-  @foreach (EngineerMachine join in Model.JoinEntities)
+  @foreach (Machine machine in Model.JoinEntities)
     {
-      <li>@join.Machine.Name
+      <li>@machine.Name
         @using (Html.BeginForm("DeleteJoin", "Engineers"))
         {
-          @Html.Hidden("joinId", @join.EngineerMachineId)
+          @Html.Hidden("joinId", @machine.MachineId)
           <button class="red" type="submit">Delete</button>
         }
       </li>
     }
   </ul>
    <ul class="egineer-list narrow">
-  @foreach (EngineerMachine join in Model.JoinEntities)
+  @foreach (Engineer engineer in Model.JoinEntities)
     {
       <li>
-      <a href='@Url.Action("Details", "Engineers", new { id = join.Engineer.EngineerId })'>
+      <a href='@Url.Action("Details", "Engineers", new { id = engineer.EngineerId })'>
       </a>
       @using (Html.BeginForm("DeleteJoin", "Machines"))
       {
-        @Html.Hidden("joinId", @join.EngineerMachineId)
+        @Html.Hidden("joinId", @engineer.EngineerId)
         <button class="red" type="submit">Delete</button>
       }
     </li> 
