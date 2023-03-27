@@ -1,12 +1,44 @@
 @{
   Layout = "_Layout";
 }
+@using SillyString.Models
+@model SillyString.Models.Egineer
 
-<h1>Welcome to the EVT!</h1>
+<h1>Welcome to Silly String factory!</h1>
+
 
 <div class="button-area">
-  <a href='@Url.Action("Index", "Egineers")'>
-    <button>See all egineers</button>
+  <ul class="machine-list">
+  @foreach (EgineerMachine join in Model.JoinEntities)
+    {
+      <li>@join.Machine.Name
+        @using (Html.BeginForm("DeleteJoin", "Egineers"))
+        {
+          @Html.Hidden("joinId", @join.EgineerMachineId)
+          <button class="red" type="submit">Delete</button>
+        }
+      </li>
+    }
+  </ul>
+   <ul class="egineer-list narrow">
+  @foreach (EgineerMachine join in Model.JoinEntities)
+    {
+      <li>
+      <a href='@Url.Action("Details", "Egineers", new { id = join.Egineer.EgineerId })'>
+        <div>@join.Egineer.Manufacturer @join.Egineer.Name </div>
+        <div>@join.Egineer.Type</div>
+      </a>
+      @using (Html.BeginForm("DeleteJoin", "Machines"))
+      {
+        @Html.Hidden("joinId", @join.EgineerMachineId)
+        <button class="red" type="submit">Delete</button>
+      }
+    </li> 
+    }
+  </ul>
+    <a href='@Url.Action("Index", "Engineers")'>
+    <button>See all engineers</button>
+  </a>
   <a href='@Url.Action("Index", "Machines")'>
     <button>See all machines</button>
   </a>

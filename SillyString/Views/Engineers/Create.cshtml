@@ -20,10 +20,6 @@
   @Html.Label("Select Type")
   @Html.DropDownListFor(model => model.Type, new SelectList(ViewBag.Types, "Name", "Name"))
   </div>
-  <div class="form-row">
-    @Html.LabelFor(model => model.Price, "Wholesale Price")
-    @Html.TextBoxFor(model => model.Price)
-  </div>
   <button class="green" type="submit">Save</button>
 }
 

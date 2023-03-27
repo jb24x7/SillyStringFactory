@@ -9,11 +9,11 @@
 
 @if (@Model.JoinEntities.Count == 0)
 {
-  <p>There are no egineers sold by this machine.</p>
+  <p>There are no egineers that can repair this machine.</p>
 }
 else
 {
-  <h4>Egineers sold by this machine:</h4>
+  <h4>Egineers that can repair by this machine:</h4>
   <ul class="egineer-list narrow">
   @foreach (EgineerMachine join in Model.JoinEntities)
     {
@@ -47,8 +47,3 @@ else
     <button class="red">Delete Machine</button>
   </a>
 </div>
-
-@* <p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Add a Egineer", "AddEgineer", new { id = Model.MachineId })</p>
-<p>@Html.ActionLink("Edit Machine", "Edit", new { id = Model.MachineId })</p>
-<p>@Html.ActionLink("Delete Machine", "Delete", new { id = Model.MachineId })</p> *@
