@@ -15,15 +15,11 @@
   @foreach (Engineer egineer in Model)
   {
     <a href='@Url.Action("Details", new { id = egineer.EngineerId })'>
-      <li>
-        Manufacturer: @egineer.Manufacturer
-      </li> 
+ 
       <li>
         Name: @egineer.Name
       </li> 
-      <li>
-        Type: @egineer.Type
-      </li> 
+
     </a>
   }
 </ul>

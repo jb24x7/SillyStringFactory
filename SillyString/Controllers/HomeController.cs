@@ -9,16 +9,21 @@ namespace SillyString.Controllers
 {
   public class HomeController : Controller
   {
+    private readonly SillyStringContext _db;
+        public HomeController(SillyStringContext db)
+    {
+      _db = db;
+    }
 
     [HttpGet("/")]
     public ActionResult Index()
     {
       ViewBag.Engineers = _db.Engineers
-                      .Include(book => book.EngineerMachine)
+                      .Include(book => book.JoinEntities)
                       .ThenInclude(join => join.Engineer)
                       .ToList();
       ViewBag.Machines = _db.Machines
-                      .Include(author => author.EngineerMachine)
+                      .Include(author => author.JoinEntities)
                       .ThenInclude(join => join.Machine)
                       .ToList();
       return View();

@@ -2,7 +2,6 @@
   Layout = "_Layout";
 }
 @using SillyString.Models
-@model SillyString.Models.Engineer
 
 <h1>Welcome to Silly String factory!</h1>
 
@@ -25,8 +24,6 @@
     {
       <li>
       <a href='@Url.Action("Details", "Engineers", new { id = join.Engineer.EngineerId })'>
-        <div>@join.Engineer.Manufacturer @join.Engineer.Name </div>
-        <div>@join.Engineer.Type</div>
       </a>
       @using (Html.BeginForm("DeleteJoin", "Machines"))
       {

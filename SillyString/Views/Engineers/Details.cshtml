@@ -5,7 +5,7 @@
 @using SillyString.Models
 @model SillyString.Models.Engineer
 
-<h2>Details for @Html.DisplayFor(model => model.Type) <span class="highlighted">@Html.DisplayFor(model => model.Manufacturer) @Html.DisplayFor(model => model.Name)<span></h2>
+<h2>Details for @Html.DisplayFor(model => model.Name)<span></h2>
 
 <div>@Html.LabelFor(Model => Model.Price, "Wholesale price:")<span class="highlighted">$@Html.DisplayFor(Model => Model.Price)</span></div>
 
