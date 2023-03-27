@@ -8,11 +8,16 @@
 
 
 <div class="button-area">
-
-    <a href='@Url.Action("Index", "Engineers")'>
-    <button>See all engineers</button>
-  </a>
-  <a href='@Url.Action("Index", "Machines")'>
-    <button>See all machines</button>
-  </a>
+<ul>
+  @foreach (Engineer engineer in Model["engineers"])
+  {
+    <li>@Html.ActionLink(@engineer.Name, "Details", "Engineers", new { id = @engineer.EngineerId})</li>
+  }
+</ul>
+<ul>
+  @foreach (Machine machine in Model["machines"])
+  {
+    <li>@Html.ActionLink(@machine.Name, "Details", "Machines", new { id = @machine.MachineId})</li>
+  }
+</ul>
 </div>
